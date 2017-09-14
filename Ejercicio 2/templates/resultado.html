@@ -1,0 +1,47 @@
+<html>
+    <head>
+        
+        <title>Trabajo Practico N&uacute;mero Uno</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- JQuery -->
+        <script src="{{url_for('static', filename='jquery/jquery-3.2.1.min.js')}}"></script>        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap/css/bootstrap.min.css')}}" />
+        <!-- Bootstrap JS -->
+        <script src="{{url_for('static', filename='bootstrap/js/popper.min.js')}}"></script>
+        <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+
+        <style type="text/css">
+
+        	.page-header{
+        		border-bottom: 1px solid;
+        		margin-bottom: 2%;
+        	}
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h3 class="display-4">Taller de Proyecto II</h3>
+                <p class="lead">Ejercicio N&uacute;mero Dos</p>
+            </div>
+        </div>
+
+        <div class="container">
+        	
+        	<div class="page-header">
+			    <h1>Usted se ha sumado en Flask exitosamente</h1>      
+			</div>        	
+
+			<ul class="list-group">
+			    <li class="list-group-item"><b>Resultado:</b> {{ suma }} </li>
+			</ul>        	
+
+        </div>        
+
+    </body>
+</html>

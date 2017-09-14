@@ -1,0 +1,155 @@
+<html>
+    <head>
+        
+        <title>Sensado</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- JQuery -->
+        <script src="{{url_for('static', filename='jquery/jquery-3.2.1.min.js')}}"></script>        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap/css/bootstrap.min.css')}}" />
+        <!-- Bootstrap JS -->
+        <script src="{{url_for('static', filename='bootstrap/js/popper.min.js')}}"></script>
+        <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+
+    </head>
+    <body style="background-color:ghostwhite">
+               
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h3 class="display-3">Taller de Proyecto II</h3>
+                <p class="lead">Ejercicios 3 y 4 </p>
+            </div>
+        </div>
+
+        <div class="container">
+
+           
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">
+                    <h4 id="frecMuestreo">Periodo Actual: {{ muestreo }} [Segundos]</h4>
+                </label><br>
+                
+                <label for="exampleFormControlSelect1">
+                    <h4>Seleccionar Periodo de Muestreo:</h4>
+                </label>
+                
+                <select class="form-control" id="exampleFormControlSelect1" name="exampleFormControlSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>30</option>
+                    <option>60</option>
+                </select>
+            </div>
+            
+            <button class="btn btn-primary">Nuevo Periodo</button>
+            <br> <br> <br>
+
+            <h4>Promedios:</h4>
+            <table class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                      <th>#</th>
+                      <th>Temperatura</th>
+                      <th>Humedad Relativa</th>
+                      <th>Presi&oacute;n Atmosf&eacute;rica</th>
+                      <th>Viento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="promedios">
+                    </tr>    
+                </tbody>
+            </table> 
+
+            <h4>Ultima Muestra:</h4>
+            <table class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                      <th>Medida ID</th>
+                      <th>Temperatura</th>
+                      <th>Humedad Relativa</th>
+                      <th>Presi&oacute;n Atmosf&eacute;rica</th>
+                      <th>Viento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="ultima">
+                    </tr>    
+                </tbody>
+            </table> 
+
+            <h4>Historico de Medidas:</h4>
+            <table class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                      <th>Medida ID</th>
+                      <th>Temperatura</th>
+                      <th>Humedad Relativa</th>
+                      <th>Presi&oacute;n Atmosf&eacute;rica</th>
+                      <th>Viento</th>
+                    </tr>
+                </thead>
+                <tbody id = "historico">       
+                </tbody>
+            </table>            
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+               $frec = "{{ muestreo }}"
+            });
+        </script>
+
+        <script type="text/javascript">
+            function actualizaPromedios(){
+                $('#promedios').load('promedios')
+                setTimeout( actualizaPromedios , $frec*1000 )
+            }
+            $(document).ready( actualizaPromedios );
+        </script>  
+
+        <script type="text/javascript">
+            function actualizaHistorico(){
+                $('#historico').load('historico')
+                setTimeout( actualizaHistorico , $frec*1000 )
+            }
+            $(document).ready( actualizaHistorico );
+        </script> 
+
+        <script type="text/javascript">
+            function actualizaUltima(){
+                $('#ultima').load('ultima');
+                setTimeout( actualizaUltima , $frec*1000 )
+            }
+            $(document).ready( actualizaUltima );
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("button").click(function() {
+                    $frec =  $("#exampleFormControlSelect1").val();
+                    $("#frecMuestreo").load('periodo/' + $frec);
+                    console.log("Periodo de muestreo: " +  $frec );
+                    actualizaPromedios();
+                    actualizaUltima();
+                    actualizaHistorico();
+                });
+            });
+        </script>
+
+    </body>
+
+    <div class="copyright" style="background-color:black">
+        <div class="container">
+          <div align="center">
+              <div style="color:white">
+                  <p> <br> ©2017 - All Rights Reserved - Pontetto Axel - Cobanera Santiago </p>
+                  <br>
+              </div>
+          </div>
+        </div>
+    </div>
+</html>
